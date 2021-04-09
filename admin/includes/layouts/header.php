@@ -1,9 +1,9 @@
 
 <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-    <a class="navbar-brand" href="./index.php">
+    <a class="navbar-brand" href="./home.php">
         <?php 
-            if(isset($_SESSION['donors']['roles_id'])):
-                echo 'Welcome ' .  $_SESSION['donors']['name'];
+            if(isset($_SESSION['root'])):
+                echo $_SESSION['root'];
             endif;
         ?>
     </a>

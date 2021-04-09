@@ -7,6 +7,6 @@
     session_destroy();
 
     # Redirect after logout
-    header('location: login.php');
+    header('location: ./index.php');
 
     exit();

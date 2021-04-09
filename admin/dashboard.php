@@ -1,44 +1,48 @@
 <?php 
-    # Include initial file php to show var and connect database
-    include './initial.php';
+    
+    session_start();
+    if(isset($_SESSION['root'])):
+    
+        # Include initial file php to show var and connect database
+        include './initial.php';
 
-    # Select data query
-    $sql_select = "SELECT * FROM `admins` WHERE 1 ";
+        # Select data query
+        $sql_select = "SELECT * FROM `admins` WHERE 1 ";
 
-    # Store data after select and connect database
-    $result_select = mysqli_query($connect_db, $sql_select);
+        # Store data after select and connect database
+        $result_select = mysqli_query($connect_db, $sql_select);
 
-    if(isset($_GET['id'])):
+        if(isset($_GET['id'])):
 
-        # Filter id 
-        $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
-        
+            # Filter id 
+            $id = filter_var($_GET['id'], FILTER_SANITIZE_NUMBER_INT);
+            
 
-        # Check by id from database
-        $sql_delete = "DELETE FROM `admins` WHERE `id` = " . $id;
+            # Check by id from database
+            $sql_delete = "DELETE FROM `admins` WHERE `id` = " . $id;
 
-        # Store query result after delete 
-        $result_delete = mysqli_query($connect_db, $sql_delete);
+            # Store query result after delete 
+            $result_delete = mysqli_query($connect_db, $sql_delete);
 
-        # Check result after delete and redirect dashboard
-        if($result_delete):
-            header('location: dashboard.php');
+            # Check result after delete and redirect dashboard
+            if($result_delete):
+                header('location: dashboard.php');
+            endif;
         endif;
-    endif;
 
-    
-    // # Store messages 
-    // $msg_warning = [];
-    
-    // # Check deleted
-    // if($result_delete):
-    //     $name = "SELECT `roles` FROM `admins` WHERE WHERE `id` = " .$id;
-    //     $name_result = mysqli_query($connect_db, $name);
-    //     $conver_name = mysqli_fetch_assoc($name_result);
-    //     $msg_warning['role'] = 'Warning ! The <strong> ' . $conver_name['roles'] . ' </strong>will be deleted';
-    // else:
         
-    // endif;
+        // # Store messages 
+        // $msg_warning = [];
+        
+        // # Check deleted
+        // if($result_delete):
+        //     $name = "SELECT `roles` FROM `admins` WHERE WHERE `id` = " .$id;
+        //     $name_result = mysqli_query($connect_db, $name);
+        //     $conver_name = mysqli_fetch_assoc($name_result);
+        //     $msg_warning['role'] = 'Warning ! The <strong> ' . $conver_name['roles'] . ' </strong>will be deleted';
+        // else:
+            
+        // endif;
 
    
 ?>
@@ -155,3 +159,9 @@
         <?php include $layouts . 'scripts.php' ?>
     </body>
 </html>
+<?php 
+else:
+    header('location: ./index.php');
+    exit();
+endif;
+?>
